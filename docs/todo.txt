@@ -1,0 +1,4 @@
+- Perform more thorough data cleaning and validation checks on the raw dataset
+- Add additional exploratory data analysis and visualizations
+- Build a predictive or descriptive model using the processed data
+- Automate the pipeline to run on new data using scheduled jobs
