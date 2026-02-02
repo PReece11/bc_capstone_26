@@ -11,16 +11,21 @@ app = typer.Typer()
 
 @app.command()
 def main(
-    # ---- REPLACE DEFAULT PATHS AS APPROPRIATE ----
     input_path: Path = RAW_DATA_DIR / "dataset.csv",
     output_path: Path = PROCESSED_DATA_DIR / "dataset.csv",
-    # ----------------------------------------------
 ):
-    # ---- REPLACE THIS WITH YOUR OWN CODE ----
-    logger.info("Processing dataset...")
-    for i in tqdm(range(10), total=10):
-        if i == 5:
-            logger.info("Something happened for iteration 5.")
+    import pandas as pd
+
+    logger.info(f"Reading raw CSV from: {input_path}")
+    df = pd.read_csv(input_path)
+
+    # tiny cleaning step: keep only the first 5 columns
+    df = df.iloc[:, :5]
+
+    logger.info(f"Writing processed CSV to: {output_path}")
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    df.to_csv(output_path, index=False)
+
     logger.success("Processing dataset complete.")
     # -----------------------------------------
 
